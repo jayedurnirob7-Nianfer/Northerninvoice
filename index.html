@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northern Logistics â€” Invoice Generator</title>
+<title>Northern Logistics — Invoice Generator</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1e1240">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -135,7 +135,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .edit-btn:hover{background:#dbb956;}
 .edit-btn.on{background:#16a34a;color:#fff;}
 
-/* â”€â”€ INVOICE PAPER â”€â”€ */
+/* ── INVOICE PAPER ── */
 #inv-paper{
   background:#fff;
   width:794px;
@@ -286,8 +286,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <!-- PDF OVERLAY -->
 <div id="pdf-overlay">
   <div class="pdf-spinner"></div>
-  <p>Generating PDFâ€¦</p>
-  <small>Capturing invoice â€” this takes a few seconds</small>
+  <p>Generating PDF…</p>
+  <small>Capturing invoice — this takes a few seconds</small>
 </div>
 
 <!-- INVOICE MODAL -->
@@ -357,7 +357,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
   <div class="modal-inner">
     <div class="modal-hdr">
-      <h3>Invoice Preview â€” A4</h3>
+      <h3>Invoice Preview — A4</h3>
       <div class="acts">
         <button class="btn-gold" id="btn-pdf" style="width:auto;padding:5px 14px;font-size:9.5px;" onclick="downloadPDF()">&#11015; Download PDF</button>
         <button class="btn-close" onclick="closeModal()">&#10005;</button>
@@ -365,7 +365,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     </div>
     <div class="modal-body">
       <div class="edit-bar">
-        <div class="edit-bar-txt" id="edit-bar-txt"><strong>Edit Mode OFF</strong> â€” Enable to click any text on the invoice and edit it directly.</div>
+        <div class="edit-bar-txt" id="edit-bar-txt"><strong>Edit Mode OFF</strong> — Enable to click any text on the invoice and edit it directly.</div>
         <button class="edit-btn" id="btn-edit" onclick="toggleEdit()">&#9998;&#65039; Enable Edit</button>
       </div>
       <div id="inv-paper">
@@ -487,8 +487,8 @@ var ALIASES={
 var rows=[],selRows=[],hdrs=[],colMap={},editMode=false,dragSrc=null;
 
 var LS={
-  URL:'nl3_url',BG:'nl3_bg_v2',BGOP:'nl3_bgop',BGSZ:'nl3_bgsz',SKIP:'nl3_skip',
-  LOGO:'nl3_logo_v2',TOG_BG:'nl3_tog_bg',TOG_BANKING:'nl3_tog_bank',TOG_SOCIALS:'nl3_tog_soc'
+  URL:'nl3_url',BG:'nl3_bg_v3',BGOP:'nl3_bgop',BGSZ:'nl3_bgsz',SKIP:'nl3_skip',
+  LOGO:'nl3_logo_v3',TOG_BG:'nl3_tog_bg',TOG_BANKING:'nl3_tog_bank',TOG_SOCIALS:'nl3_tog_soc'
 };
 
 var CSSMAP={
@@ -565,7 +565,7 @@ function boot(){
       dz.addEventListener('dragleave',function(){dz.style.borderColor='';});
       dz.addEventListener('drop',function(e){e.preventDefault();dz.style.borderColor='';var f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/')){var r=new FileReader();r.onload=function(ev){applyBgImg(ev.target.result);};r.readAsDataURL(f);}});
     }
-    console.log('Northern Logistics Invoice Generator â€” boot OK');
+    console.log('Northern Logistics Invoice Generator — boot OK');
   }catch(err){console.error('Boot error:',err);toast('Boot error: '+err.message,8000);}
 }
 window.resizeMobile = function(){
@@ -590,7 +590,7 @@ window.addEventListener('resize', window.resizeMobile);
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 
-/* â”€â”€ LOGO â”€â”€ */
+/* ── LOGO ── */
 function applyLogoImg(src,silent){
   var el = g('inv-logo-icon');
   el.innerHTML = '<img src="'+src+'" alt="logo">';
@@ -609,7 +609,7 @@ window.removeLogo=function(){
   lsRm(LS.LOGO);toast('Logo removed');
 };
 
-/* â”€â”€ EDIT MODE â”€â”€ */
+/* ── EDIT MODE ── */
 window.toggleEdit=function(){
   editMode=!editMode;
   var paper=g('inv-paper'),btn=g('btn-edit'),bar=g('edit-bar-txt');
@@ -617,18 +617,18 @@ window.toggleEdit=function(){
     paper.classList.add('edit-mode');
     paper.querySelectorAll('[contenteditable]').forEach(function(el){el.setAttribute('contenteditable','true');});
     btn.textContent='Done';btn.classList.add('on');
-    bar.innerHTML='<strong style="color:#4caf50;">Edit Mode ON</strong> â€” Click any text to edit.';
+    bar.innerHTML='<strong style="color:#4caf50;">Edit Mode ON</strong> — Click any text to edit.';
     toast('Click any field to edit');
   }else{
     paper.classList.remove('edit-mode');
     paper.querySelectorAll('[contenteditable]').forEach(function(el){el.setAttribute('contenteditable','false');});
     btn.textContent='Enable Edit';btn.classList.remove('on');
-    bar.innerHTML='<strong>Edit Mode OFF</strong> â€” Enable to click any invoice text and edit it directly.';
+    bar.innerHTML='<strong>Edit Mode OFF</strong> — Enable to click any invoice text and edit it directly.';
     toast('Edits saved');
   }
 };
 
-/* â”€â”€ TOGGLES â”€â”€ */
+/* ── TOGGLES ── */
 window.toggleEl=function(id,dt,show){
   var el=g(id);if(el)el.style.display=show?dt:'none';
   if(id==='inv-banking')lsSet(LS.TOG_BANKING,show?'1':'0');
@@ -641,7 +641,7 @@ window.toggleBg=function(show){
   l.style.display=(show&&has)?'block':'none';
 };
 
-/* â”€â”€ FONT SIZES â”€â”€ */
+/* ── FONT SIZES ── */
 window.setSZ=function(cssVar,val){g('inv-paper').style.setProperty(cssVar,parseFloat(val)+'px');saveFontSizes();};
 window.resetSpacing=function(){
   var paper=g('inv-paper');
@@ -652,7 +652,7 @@ window.resetSpacing=function(){
   saveFontSizes();toast('Font sizes reset to defaults');
 };
 
-/* â”€â”€ BACKGROUND â”€â”€ */
+/* ── BACKGROUND ── */
 function applyBgImg(src,silent){
   var l=g('inv-bg');if(!l)return;
   var szEl=g('bg-sz'),opEl=g('bg-op'),prevEl=g('bg-prev'),togEl=g('tog-bg');
@@ -699,11 +699,11 @@ window.changeBank = function(val) {
   }
 };
 
-/* â”€â”€ PDF DOWNLOAD â”€â”€ */
+/* ── PDF DOWNLOAD ── */
 window.downloadPDF=function(){
   if(editMode)window.toggleEdit();
   var overlay=g('pdf-overlay'),btn=g('btn-pdf');
-  overlay.classList.add('show');btn.disabled=true;btn.textContent='Generatingâ€¦';
+  overlay.classList.add('show');btn.disabled=true;btn.textContent='Generating…';
   var fname=getPdfFilename();
   requestAnimationFrame(function(){
     setTimeout(function(){
@@ -722,18 +722,18 @@ window.downloadPDF=function(){
         var pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
         pdf.addImage(canvas.toDataURL('image/jpeg',1.0),'JPEG',0,0,210,297,undefined,'FAST');
         pdf.save(fname);
-        overlay.classList.remove('show');btn.disabled=false;btn.textContent='â¬‡ Download PDF';
+        overlay.classList.remove('show');btn.disabled=false;btn.textContent='⬇ Download PDF';
         toast('Saved: '+fname);
       }).catch(function(err){
         if(document.body.contains(host))document.body.removeChild(host);
-        overlay.classList.remove('show');btn.disabled=false;btn.textContent='â¬‡ Download PDF';
+        overlay.classList.remove('show');btn.disabled=false;btn.textContent='⬇ Download PDF';
         toast('PDF failed: '+err.message,6000);
       });
     },200);
   });
 };
 
-/* â”€â”€ CSV PARSING â”€â”€ */
+/* ── CSV PARSING ── */
 function splitLine(line){
   var res=[],cur='',inQ=false;
   for(var i=0;i<line.length;i++){
@@ -776,7 +776,7 @@ function getV(row,field){
   return '';
 }
 
-/* â”€â”€ SHEET FETCH â”€â”€ */
+/* ── SHEET FETCH ── */
 function extractId(url){var m=url.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);return m?m[1]:null;}
 function extractGid(url){var m=url.match(/[#&?]gid=(\d+)/);return m?m[1]:'0';}
 
@@ -864,14 +864,14 @@ async function fetchCsvText(sid,gid){
 
   throw new Error(
     'Could not load sheet. Please check:\n'+
-    '1. Sheet is shared â†’ "Anyone with the link can view"\n'+
+    '1. Sheet is shared → "Anyone with the link can view"\n'+
     '2. Not restricted to your organization only\n'+
     '3. The URL is correct\n'+
     '4. Try opening the gviz URL in a new tab (see console)'
   );
 }
 
-/* â”€â”€ LOAD SHEET â”€â”€ */
+/* ── LOAD SHEET ── */
 async function loadSheet(){
   var raw=g('sheet-url').value.trim();
   if(!raw){toast('Paste a Google Sheet URL first');return;}
@@ -884,7 +884,7 @@ async function loadSheet(){
     setProgress(30);setStatus('y','Fetching data...');
     var csv=await fetchCsvText(sid,extractGid(raw));
     setProgress(90);parseCSV(csv);setProgress(100);
-    setStatus('g','Connected â€” '+rows.length+' rows');
+    setStatus('g','Connected — '+rows.length+' rows');
     lsSet(LS.URL,raw);g('saved-badge').classList.add('show');
     toast('Loaded '+rows.length+' rows');
   }catch(e){
@@ -892,7 +892,7 @@ async function loadSheet(){
     setStatus('r','Error');setProgress(0);
     toast('Failed: '+e.message,8000);
   }finally{
-    btn.disabled=false;btn.textContent='â†º Load Sheet';
+    btn.disabled=false;btn.textContent='↺ Load Sheet';
   }
 }
 
@@ -902,7 +902,7 @@ async function loadSheetSilent(raw){
     setProgress(30);
     var csv=await fetchCsvText(sid,extractGid(raw));
     setProgress(100);parseCSV(csv);
-    setStatus('g','Auto-loaded â€” '+rows.length+' rows');
+    setStatus('g','Auto-loaded — '+rows.length+' rows');
     g('saved-badge').classList.add('show');
   }catch(e){
     console.error('Silent load error:',e);
@@ -910,7 +910,7 @@ async function loadSheetSilent(raw){
   }
 }
 
-/* â”€â”€ TABLE RENDER â”€â”€ */
+/* ── TABLE RENDER ── */
 function renderTable(){
   var body=g('tbl-body');
   if(!rows.length){body.innerHTML='<tr><td colspan="14"><div class="empty-state"><div class="ic">&#128205;</div><p>No data loaded. Try adjusting the "Skip rows" setting.</p></div></td></tr>';updateSelBadge();return;}
@@ -919,18 +919,18 @@ function renderTable(){
     html+='<tr draggable="true" data-idx="'+i+'">'
       +'<td style="text-align:center;"><span class="drag-handle" title="Drag">&#10023;</span></td>'
       +'<td style="text-align:center;"><input type="checkbox" class="row-chk" data-idx="'+i+'"></td>'
-      +'<td><strong>'+esc(getV(r,'Name')||'â€”')+'</strong></td>'
-      +'<td>'+esc(getV(r,'Address')||'â€”')+'</td>'
-      +'<td>'+esc(getV(r,'Mobile')||'â€”')+'</td>'
-      +'<td>'+esc(getV(r,'ShippingMark')||'â€”')+'</td>'
-      +'<td>'+esc(getV(r,'ShippingNumber')||'â€”')+'</td>'
-      +'<td>'+esc(getV(r,'TrackingNumber')||'â€”')+'</td>'
-      +'<td>'+esc(getV(r,'Description')||'â€”')+'</td>'
-      +'<td style="text-align:center;">'+esc(getV(r,'Unit')||'â€”')+'</td>'
-      +'<td style="text-align:center;">'+(getV(r,'Weight') ? esc(getV(r,'Weight')) + ' kg' : 'â€”')+'</td>'
-      +'<td style="text-align:center;">'+esc(getV(r,'Cost')||'â€”')+'</td>'
-      +'<td><span class="tag tag-a">'+esc(getV(r,'Total')||'â€”')+'</span></td>'
-      +'<td><span class="tag tag-d">'+esc(getV(r,'Date')||'â€”')+'</span></td>'
+      +'<td><strong>'+esc(getV(r,'Name')||'—')+'</strong></td>'
+      +'<td>'+esc(getV(r,'Address')||'—')+'</td>'
+      +'<td>'+esc(getV(r,'Mobile')||'—')+'</td>'
+      +'<td>'+esc(getV(r,'ShippingMark')||'—')+'</td>'
+      +'<td>'+esc(getV(r,'ShippingNumber')||'—')+'</td>'
+      +'<td>'+esc(getV(r,'TrackingNumber')||'—')+'</td>'
+      +'<td>'+esc(getV(r,'Description')||'—')+'</td>'
+      +'<td style="text-align:center;">'+esc(getV(r,'Unit')||'—')+'</td>'
+      +'<td style="text-align:center;">'+(getV(r,'Weight') ? esc(getV(r,'Weight')) + ' kg' : '—')+'</td>'
+      +'<td style="text-align:center;">'+esc(getV(r,'Cost')||'—')+'</td>'
+      +'<td><span class="tag tag-a">'+esc(getV(r,'Total')||'—')+'</span></td>'
+      +'<td><span class="tag tag-d">'+esc(getV(r,'Date')||'—')+'</span></td>'
       +'</tr>';
   });
   body.innerHTML=html;
@@ -957,10 +957,10 @@ function toggleAll(c){document.querySelectorAll('.row-chk').forEach(function(x){
 window.selAll=function(){g('check-all').checked=true;toggleAll(true);};
 window.clearSel=function(){g('check-all').checked=false;toggleAll(false);};
 
-/* â”€â”€ MODAL â”€â”€ */
+/* ── MODAL ── */
 window.closeModal=function(){g('inv-modal').classList.remove('open');if(editMode)window.toggleEdit();};
 
-/* â”€â”€ GENERATE INVOICE â”€â”€ */
+/* ── GENERATE INVOICE ── */
 function genInvoice(){
   if(!selRows.length){toast('Select at least one row first');return;}
   var first=selRows[0];
@@ -997,7 +997,7 @@ function genInvoice(){
       +'<td class="tc">'+(wRaw ? esc(wRaw) + ' kg' : '')+'</td>'
       +'<td class="tc" style="color:#aaa;">&#215;</td>'
       +'<td class="tc">'+esc(cRaw)+'</td>'
-      +'<td class="tr">'+(line?line.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}):'â€”')+'</td>'
+      +'<td class="tr">'+(line?line.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}):'—')+'</td>'
       +'</tr>';
   });
   g('inv-rows').innerHTML=html;
