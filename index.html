@@ -219,9 +219,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   #inv-modal { padding: 0; align-items: stretch; justify-content: flex-start; flex-direction: column; overflow-y: auto; }
   .modal-inner { border-radius: 0; width: 100vw; height: auto; max-height: none; display: flex; flex-direction: column; margin: 0; flex-shrink: 0; }
   .modal-body { overflow-x: hidden; overflow-y: hidden; -webkit-overflow-scrolling: touch; padding: 10px; display: flex; flex-direction: column; align-items: center; }
-  #btn-mobile-designer { display: inline-flex !important; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
-  #dpanel { display: none; width: 100vw; max-height: none; position: static; border-radius: 0; border-top: 2px solid rgba(255,255,255,.05); flex-shrink: 0; }
-  #dpanel.show-mobile { display: flex; }
+  #btn-mobile-designer { display: none !important; }
+  #dpanel { display: block; width: 100vw; max-height: none; position: static; border-radius: 0; border-top: 2px solid rgba(255,255,255,.05); flex-shrink: 0; }
 }
 </style>
 </head>
@@ -360,7 +359,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div class="modal-hdr">
       <h3>Invoice Preview — A4</h3>
       <div class="acts">
-        <button class="btn-gold" id="btn-mobile-designer" style="display:none;padding:5px 10px;font-size:9.5px;" onclick="document.getElementById('dpanel').classList.toggle('show-mobile');setTimeout(window.resizeMobile,50);">&#9881;&#65039; Settings</button>
         <button class="btn-gold" id="btn-pdf" style="width:auto;padding:5px 14px;font-size:9.5px;" onclick="downloadPDF()">&#11015; Download PDF</button>
         <button class="btn-close" onclick="closeModal()">&#10005;</button>
       </div>
@@ -577,9 +575,14 @@ window.resizeMobile = function(){
      var s=(window.innerWidth-20)/794; if(s>1)s=1;
      paper.style.transform='scale('+s+')';
      paper.style.transformOrigin='top center';
+     var diffX = 794 * (1 - s) / 2;
+     paper.style.marginLeft = -diffX + 'px';
+     paper.style.marginRight = -diffX + 'px';
      paper.style.marginBottom = -(1123*(1-s)) + 'px';
   } else {
      paper.style.transform='';
+     paper.style.marginLeft='';
+     paper.style.marginRight='';
      paper.style.marginBottom='';
   }
 };
